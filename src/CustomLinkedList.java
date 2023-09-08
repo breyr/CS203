@@ -36,7 +36,7 @@ public class CustomLinkedList {
             throw new IndexOutOfBoundsException();
         }
         Node curr = head.next;
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i <= index; i++) {
             curr = curr.next;
         }
         return curr.item;
@@ -72,6 +72,8 @@ public class CustomLinkedList {
     }
 
     public static void main(String[] args) {
-
+        CustomLinkedList list = new CustomLinkedList();
+        list.add(1);
+        list.get(0);
     }
 }
