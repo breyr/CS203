@@ -32,7 +32,14 @@ public class CustomLinkedList {
     }
 
     public Object get(int index) {
-        return null;
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+        Node curr = head.next;
+        for (int i = 0; i < index; i++) {
+            curr = curr.next;
+        }
+        return curr.item;
     }
 
     // Add the end of the list
@@ -44,12 +51,24 @@ public class CustomLinkedList {
             // will not be destroyed until head is destroyed
             head.next = n;
         } else { // add the item if we already have an item in the list
-
+            Node n = new Node(obj);
+            Node curr = head;
+            while (curr.next != null) {
+                curr = curr.next;
+            }
+            curr.next = n;
         }
     }
 
     public void replace(Object obj, int index) {
-
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+        Node curr = head;
+        for (int i = 0; i < index; i++) {
+            curr = curr.next;
+        }
+        curr.item = obj;
     }
 
     public static void main(String[] args) {
