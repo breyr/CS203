@@ -1,4 +1,4 @@
-// Having class here is not best practice
+
 class Node {
     Object item;
     Node next;
@@ -31,15 +31,30 @@ public class CustomLinkedList {
         return size;
     }
 
-    public Object get(int index) {
+    /**
+     * This method returns an object provided the index.
+     * NOTE: it supports negative by applying the modulo operator to the index
+     * 
+     * @param index an integer that describes the item in an indexed list that you
+     *              would like to get the value of
+     * @return the object at the index provided
+     * @throws Exception if the index is out of bounds
+     */
+    public Object get(int index) throws Exception {
         if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
+            throw new Exception("Index out of bounds");
         }
-        Node curr = head.next;
-        for (int i = 0; i <= index; i++) {
-            curr = curr.next;
-        }
-        return curr.item;
+        index = Math.floorMod(index, size); // supports any number, but not needed because we throw new Exception
+        int counter = -1;
+        Node n = head;
+        do {
+            counter++;
+            n = n.next; // here because we need to skip the first node
+            if (counter == index) {
+                return n.item;
+            }
+        } while (counter != index);
+        return null;
     }
 
     // Add the end of the list
@@ -58,6 +73,7 @@ public class CustomLinkedList {
             }
             curr.next = n;
         }
+        size++;
     }
 
     public void replace(Object obj, int index) {
@@ -74,6 +90,16 @@ public class CustomLinkedList {
     public static void main(String[] args) {
         CustomLinkedList list = new CustomLinkedList();
         list.add(1);
-        list.get(0);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        try {
+            System.out.println(list.get(-2));
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+        System.out.println("I am here!");
     }
 }
