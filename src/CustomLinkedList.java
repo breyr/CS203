@@ -76,15 +76,19 @@ public class CustomLinkedList {
         size++;
     }
 
-    public void replace(Object obj, int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
+    public Object replace(int index, Object obj) {
         Node curr = head;
-        for (int i = 0; i < index; i++) {
+        int count = -1;
+        while (count != index) {
+            count++;
             curr = curr.next;
+            if (count == index) {
+                Object prevItem = curr.item;
+                curr.item = obj;
+                return prevItem;
+            }
         }
-        curr.item = obj;
+        return null;
     }
 
     public static void main(String[] args) {
@@ -93,6 +97,7 @@ public class CustomLinkedList {
         list.add(2);
         list.add(3);
         list.add(4);
+        System.out.println(list.replace(0, 5));
         try {
             System.out.println(list.get(-2));
         } catch (Exception e) {

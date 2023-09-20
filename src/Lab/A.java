@@ -1,4 +1,4 @@
-package Lab;
+package lab;
 
 public class A {
     private B roadhog;
