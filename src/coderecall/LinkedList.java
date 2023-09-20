@@ -118,24 +118,37 @@ public class LinkedList {
         return -1;
     }
 
+    // recursive solution for traversal
+    public static String printList(Node n) {
+        // base case would be if curr == null
+        // smaller problem would be whatever the next node is
+        if (n == null) {
+            return "";
+        }
+        return n.getItem() + printList(n.getNext());
+    }
+
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
         list.add("1");
         list.add("2");
         list.add("3");
-        try {
-            list.add(0, "5");
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-        }
-        try {
-            list.remove(2);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-        }
-        System.out.println(list.remove("3"));
-        System.out.println(list.toString());
+        // pass list head to print list recursively
+        System.out.println(printList(list.head));
+
+        // try {
+        // list.add(0, "5");
+        // } catch (Exception e) {
+        // e.printStackTrace();
+        // System.out.println(e.getMessage());
+        // }
+        // try {
+        // list.remove(2);
+        // } catch (Exception e) {
+        // e.printStackTrace();
+        // System.out.println(e.getMessage());
+        // }
+        // System.out.println(list.remove("3"));
+        // System.out.println(list.toString());
     }
 }
